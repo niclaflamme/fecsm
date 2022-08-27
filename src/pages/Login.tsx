@@ -1,18 +1,21 @@
 import React, { useState } from "react";
 
-import { useAxios } from '../hooks/useAxios';
+import { useAxios } from "../hooks/useAxios";
+
+const shouldSendRequest = false;
 
 type Event = {
   target: {
     value: string;
   };
+  preventDefault: () => void;
 };
 
 export const Login: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const axios = useAxios()
+  const axios = useAxios();
 
   const handleEmailChange = (event: Event) => {
     setEmail(event.target.value);
@@ -22,9 +25,20 @@ export const Login: React.FC = () => {
     setPassword(event.target.value);
   };
 
-  const handSubmit = async () => {
-    axios.post('/login', { email, password });
-  }
+  const handSubmit = async (event: Event) => {
+    event.preventDefault();
+
+    // TODO (Nic)
+    // - Enpoint should exist before using it
+    // - remove `shouldSendRequest` when ready
+
+    if (shouldSendRequest) {
+      const result = await axios.post("/login", { email, password });
+      console.log({ result });
+    }
+
+    console.log({ email, password });
+  };
 
   return (
     <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -41,7 +55,7 @@ export const Login: React.FC = () => {
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-          <form className="space-y-6" action="#" method="POST">
+          <form className="space-y-6" onSubmit={handSubmit}>
             <div>
               <label
                 htmlFor="email"
