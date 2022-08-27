@@ -1,6 +1,8 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import logo from './logo.svg'
 import './App.css'
+
+const VITE__BACKEND_URL = import.meta.env.VITE__BACKEND_URL
 
 function App() {
   const [count, setCount] = useState(0)
@@ -25,7 +27,7 @@ function App() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Learn React
+            { VITE__BACKEND_URL }
           </a>
           {' | '}
           <a
