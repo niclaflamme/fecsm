@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useAxios } from "../hooks/useAxios";
+
 const axios = useAxios();
 
 type Event = {
@@ -24,10 +26,12 @@ export const Signup: React.FC = () => {
     setDomain(event.target.value);
   }; 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     console.log('hello')
+    // const test = await axios.get('/users/login')
+    localStorage.setItem('auth', 'test');
   }
 
   return (
