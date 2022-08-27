@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import { useAxios } from '../hooks/useAxios';
+
 type Event = {
   target: {
     value: string;
@@ -10,6 +12,8 @@ export const Login: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const axios = useAxios()
+
   const handleEmailChange = (event: Event) => {
     setEmail(event.target.value);
   };
@@ -17,6 +21,10 @@ export const Login: React.FC = () => {
   const handlePasswordChange = (event: Event) => {
     setPassword(event.target.value);
   };
+
+  const handSubmit = async () => {
+    axios.post('/login', { email, password });
+  }
 
   return (
     <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
