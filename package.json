@@ -12,6 +12,7 @@
     "tailwind:watch": "npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch"
   },
   "dependencies": {
+    "axios": "^0.27.2",
     "http-server": "^14.1.1",
     "https-serve": "^1.0.0",
     "react": "^18.2.0",
